@@ -1,4 +1,4 @@
-import { Auctions } from "@liqnft/candy-shop";
+import { Auctions , CreateAuction} from "@liqnft/candy-shop";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { candyShop } from "../utils/candy-shop";
@@ -6,11 +6,21 @@ import styled from "styled-components";
 
 const AuctionsView: React.FC = () => {
   const wallet = useAnchorWallet();
-
+  console.log(wallet)
   return (
     <DesContainer>
       <h1 style={{ marginTop: 40, marginBottom: 15 }}>Auctions</h1>
-      <p style={{ marginBottom: 40 }}>Note: Shop owners can create auctions in the <a href="https://candy.liqnft.com/shop/auctions" target="_blank" rel="noreferrer noopener">admin panel</a>.</p>
+      
+
+      <CreateAuction
+          candyShop={candyShop}
+          wallet={wallet}
+          walletConnectComponent={<WalletMultiButton />}
+        cacheUserNFT={true}
+      />
+      <br />
+      <br />
+      <h1>Current NFT'S In Auctions</h1>
       <Auctions candyShop={candyShop} wallet={wallet} walletConnectComponent={<WalletMultiButton />} />
     </DesContainer>
   );
